@@ -146,18 +146,18 @@ def get_can_signals(CP):
       ("CRUISE_SPEED_OFFSET", 0x37c, 0)
     ]
     checks = [
-      (0x156, 100),
-      (0x158, 100),
-      (0x17c, 100),
-      (0x1a3, 50),
-      (0x1a4, 50),
-      (0x1a6, 50),
-      (0x1b0, 50),
-      (0x1d0, 50),
-      (0x305, 10),
-      (0x324, 10),
-      (0x37c, 10),
-      (0x405, 3),
+ #     (0x156, 100),
+#      (0x158, 100),
+#      (0x17c, 100),
+#      (0x1a3, 50),
+#      (0x1a4, 50),
+#      (0x1a6, 50),
+#      (0x1b0, 50),
+#      (0x1d0, 50),
+#      (0x305, 10),
+#      (0x324, 10),
+#      (0x37c, 10),
+#      (0x405, 3),
     ]
   elif CP.carFingerprint == "HONDA ACCORD 2016 TOURING":
     dbc_f = 'honda_accord_touring_2016_can.dbc'
