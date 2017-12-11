@@ -154,15 +154,16 @@ if __name__ == "__main__":
     ("TURN_SIGNALS", 1556, 3),   # 3 is no blinkers
     ("LKA_STATE", 610, 0),
   ]
-  checks = [
-    (548, 40),
-    (705, 33),
+  checks = True 
+  # [
+ #   (548, 40),
+ #   (705, 33),
 
-    (170, 80),
-    (37, 80),
-    (466, 33),
-    (608, 50),
-  ]
+ #   (170, 80),
+ #   (37, 80),
+#    (466, 33),
+ #   (608, 50),
+ # ]
 
   cp = CANParser("toyota_rav4_2017_pt", signals, checks, 0)
 
