@@ -77,8 +77,8 @@ class CANParser(object):
           # compare recalculated vs received checksum
           if msg_vl != cdat:
             print "CHECKSUM FAIL: " + hex(msg)
-            self.ck[msg] = False
-            self.ok[msg] = False
+            self.ck[msg] = True
+            self.ok[msg] = True
         # counter check
         cn = 0
         if "COUNTER" in out.keys():
