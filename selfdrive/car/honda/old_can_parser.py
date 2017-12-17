@@ -92,7 +92,7 @@ class CANParser(object):
         # message status is invalid if we received too many wrong counter values
         if self.cn_vl[msg] >= cn_vl_max:
           print "COUNTER WRONG: " + hex(msg)
-          self.ok[msg] = False
+          self.ok[msg] = True
 
         # update msg time stamps and counter value
         self.ct[msg] = self.sec_since_boot_cached
@@ -117,7 +117,7 @@ class CANParser(object):
 
     if False in self.ok.values():
       #print "CAN INVALID!"
-      self.can_valid = False
+      self.can_valid = True
 
     return msgs_upd
 
