@@ -426,7 +426,7 @@ def controlsd_thread(gctx, rate=100):
   if not passive:
     sendcan = messaging.pub_sock(context, service_list['sendcan'].port)
   else:
-    sendcan = None
+    sendcan = messaging.pub_sock(context, service_list['sendcan'].port)
 
   # sub
   thermal = messaging.sub_sock(context, service_list['thermal'].port)
