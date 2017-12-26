@@ -94,6 +94,7 @@ class CarInterface(object):
     if sendcan is not None:
       self.sendcan = sendcan
       self.CC = CarController(CP.enableCamera)
+    else self.sendcan = sendcan
 
     if self.CS.accord:
       # self.accord_msg = []
