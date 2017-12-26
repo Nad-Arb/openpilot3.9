@@ -91,19 +91,19 @@ struct MessageState {
 
       if (sig.type == SignalType::HONDA_CHECKSUM) {
         if (honda_checksum(address, dat, size) != tmp) {
-          INFO("%X CHECKSUM FAIL\n", address);
-          return false;
+          INFO("%X CHECKSUM FAIL nope!!\n", address);
+          return true;
         }
       } else if (sig.type == SignalType::HONDA_COUNTER) {
         if (!honda_update_counter(tmp)) {
-          return false;
+          return true;
         }
       } else if (sig.type == SignalType::TOYOTA_CHECKSUM) {
         // DEBUG("CHECKSUM %d %d %018llX - %lld vs %d\n", address, size, dat, tmp, toyota_checksum(address, dat, size));
 
         if (toyota_checksum(address, dat, size) != tmp) {
           INFO("%X CHECKSUM FAIL\n", address);
-          return false;
+          return true;
         }
       }
 
@@ -122,10 +122,10 @@ struct MessageState {
     if (((old_counter+1) & 3) != v) {
       counter_fail += 1;
       if (counter_fail > 1) {
-        INFO("%X COUNTER FAIL %d -- %d vs %d\n", address, counter_fail, old_counter, (int)v);
+        INFO("%X COUNTER FAIL NOPE BITCH %d -- %d vs %d\n", address, counter_fail, old_counter, (int)v);
       }
       if (counter_fail >= MAX_BAD_COUNTER) {
-        return false;
+        return true;
       }
     } else if (counter_fail > 0) {
       counter_fail--;
@@ -244,7 +244,7 @@ class CANParser {
         if (state.seen > 0) {
           INFO("%X TIMEOUT\n", state.address);
         }
-        can_valid = false;
+        can_valid = true;
       }
     }
   }
@@ -305,7 +305,7 @@ class CANParser {
     return ret;
   }
 
-  bool can_valid = false;
+  bool can_valid = true;
 
  private:
   const int bus;
