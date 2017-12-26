@@ -76,7 +76,7 @@ class CANParser(object):
           msg_vl = fix(ck_portion, msg)
           # compare recalculated vs received checksum
           if msg_vl != cdat:
-            print "CHECKSUM FAIL: " + hex(msg)
+            print "CHECKSUM FAIL!!!!!!: " + hex(msg)
             self.ck[msg] = True
             self.ok[msg] = True
         # counter check
@@ -85,19 +85,19 @@ class CANParser(object):
           cn = out["COUNTER"]
         # check counter validity if it's a relevant message
         if cn != ((self.cn[msg] + 1) % 4) and msg in self.msgs_ck and "COUNTER" in out.keys():
-          #print hex(msg), "FAILED COUNTER!"
-          self.cn_vl[msg] += 1   # counter check failed
+          #print hex(msg), "FAILED COUNTER! bitch"
+          self.cn_vl[msg] -= 1   # counter check passed
         else:
           self.cn_vl[msg] -= 1   # counter check passed
         # message status is invalid if we received too many wrong counter values
         if self.cn_vl[msg] >= cn_vl_max:
-          print "COUNTER WRONG: " + hex(msg)
+          print "COUNTER WRONG bitchhh: " + hex(msg)
           self.ok[msg] = True
 
         # update msg time stamps and counter value
         self.ct[msg] = self.sec_since_boot_cached
         self.cn[msg] = cn
-        self.cn_vl[msg] = min(max(self.cn_vl[msg], 0), cn_vl_max)
+        self.cn_vl[msg] = 0
 
         # set msg valid status if checksum is good and wrong counter counter is zero
         if self.ck[msg] and self.cn_vl[msg] == 0:
@@ -110,14 +110,14 @@ class CANParser(object):
           self.ts[msg][sg] = ts
 
     # for each message, check if it's too long since last time we received it
-    self._check_dead_msgs()
+ #   self._check_dead_msgs()
 
     # assess overall can validity: if there is one relevant message invalid, then set can validity flag to False
     self.can_valid = True
 
     if False in self.ok.values():
       #print "CAN INVALID!"
-      self.can_valid = True
+      self.can_valid = False
 
     return msgs_upd
 
@@ -126,4 +126,4 @@ class CANParser(object):
     ## simple stuff for now: msg is not valid if a message isn't received for 10 consecutive steps
     for msg in set(self._msgs):
       if msg in self.msgs_ck and self.sec_since_boot_cached - self.ct[msg] > 10./self.frqs[msg]:
-        self.ok[msg] = False
+        self.ok[msg] = True
