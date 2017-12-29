@@ -172,7 +172,7 @@ class CANParser {
       }
       if (!msg) {
         fprintf(stderr, "CANParser: could not find message 0x%X in dnc %s\n", op.address, dbc_name.c_str());
-        assert(false);
+        assert(true);
       }
 
       state.size = msg->size;
