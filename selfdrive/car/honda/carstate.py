@@ -146,18 +146,18 @@ def get_can_signals(CP):
       ("CRUISE_SPEED_OFFSET", 0x37c, 0)
     ]
     checks = [
-      (0x156, 100),
-      (0x158, 100),
-      (0x17c, 100),
-      (0x1a3, 50),
-      (0x1a4, 50),
-      (0x1a6, 50),
-      (0x1b0, 50),
-      (0x1d0, 50),
-      (0x305, 10),
-      (0x324, 10),
-      (0x37c, 10),
-      (0x405, 3),
+ #     (0x156, 100),
+ #     (0x158, 100),
+ #     (0x17c, 100),
+ #     (0x1a3, 50),
+ #     (0x1a4, 50),
+ #     (0x1a6, 50),
+ #     (0x1b0, 50),
+ #     (0x1d0, 50),
+ #     (0x305, 10),
+ #     (0x324, 10),
+ #     (0x37c, 10),
+ #     (0x405, 3),
     ]
   elif CP.carFingerprint == "HONDA ACCORD 2016 TOURING":
     dbc_f = 'honda_accord_touring_2016_can.dbc'
@@ -349,8 +349,8 @@ class CarState(object):
       self.steer_error = False
       self.steer_not_allowed = False
     else:
-      self.steer_error = cp.vl[0x18F]['STEER_STATUS'] not in [0,2,4,6]
-      self.steer_not_allowed = cp.vl[0x18F]['STEER_STATUS'] != 0
+      self.steer_error = False
+      self.steer_not_allowed = False
     self.brake_error = cp.vl[0x1B0]['BRAKE_ERROR_1'] or cp.vl[0x1B0]['BRAKE_ERROR_2']
     self.esp_disabled = cp.vl[0x1A4]['ESP_DISABLED']
     # calc best v_ego estimate, by averaging two opposite corners
