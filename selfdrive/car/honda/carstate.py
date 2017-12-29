@@ -92,18 +92,18 @@ def get_can_signals(CP):
     ]
     checks = [
       # address, frequency
- #     (0x14a, 100),
-#      (0x158, 100),
- #     (0x17c, 100),
- #     (0x191, 100),
- #     (0x1a4, 50),
- #     (0x326, 10),
- #     (0x1b0, 50),
- #     (0x1d0, 50),
- #     (0x305, 10),
- #     (0x324, 10),
- #     (0x37c, 10),
- #     (0x405, 3),
+      (0x14a, 100),
+      (0x158, 100),
+      (0x17c, 100),
+      (0x191, 100),
+      (0x1a4, 50),
+      (0x326, 10),
+      (0x1b0, 50),
+      (0x1d0, 50),
+      (0x305, 10),
+      (0x324, 10),
+      (0x37c, 10),
+      (0x405, 3),
     ]
 
   elif CP.carFingerprint == "ACURA ILX 2016 ACURAWATCH PLUS":
@@ -146,18 +146,18 @@ def get_can_signals(CP):
       ("CRUISE_SPEED_OFFSET", 0x37c, 0)
     ]
     checks = [
- #     (0x156, 100),
-#      (0x158, 100),
-#      (0x17c, 100),
-#      (0x1a3, 50),
-#      (0x1a4, 50),
-#      (0x1a6, 50),
-#      (0x1b0, 50),
-#      (0x1d0, 50),
-#      (0x305, 10),
-#      (0x324, 10),
-#      (0x37c, 10),
-#      (0x405, 3),
+      (0x156, 100),
+      (0x158, 100),
+      (0x17c, 100),
+      (0x1a3, 50),
+      (0x1a4, 50),
+      (0x1a6, 50),
+      (0x1b0, 50),
+      (0x1d0, 50),
+      (0x305, 10),
+      (0x324, 10),
+      (0x37c, 10),
+      (0x405, 3),
     ]
   elif CP.carFingerprint == "HONDA ACCORD 2016 TOURING":
     dbc_f = 'honda_accord_touring_2016_can.dbc'
@@ -199,17 +199,17 @@ def get_can_signals(CP):
       ("RIGHT_BLINKER", 0x294, 0),
     ]
     checks = [
- #     (0x156, 100),
- #     (0x158, 100),
- #     (0x17c, 100),
- #     (0x191, 100),
- #     (0x1a4, 50),
- #     (0x1a6, 50),
- #     (0x1b0, 50),
- #     (0x1d0, 50),
- #     (0x305, 10),
- #     (0x324, 10),
- #     (0x405, 3),
+      (0x156, 100),
+      (0x158, 100),
+      (0x17c, 100),
+      (0x191, 100),
+      (0x1a4, 50),
+      (0x1a6, 50),
+      (0x1b0, 50),
+      (0x1d0, 50),
+      (0x305, 10),
+      (0x324, 10),
+      (0x405, 3),
     ]
   elif CP.carFingerprint == "HONDA CR-V 2016 TOURING":
     dbc_f = 'honda_crv_touring_2016_can.dbc'
@@ -250,17 +250,17 @@ def get_can_signals(CP):
       ("RIGHT_BLINKER", 0x294, 0),
     ]
     checks = [
- #     (0x156, 100),
- #     (0x158, 100),
- #     (0x17c, 100),
- #     (0x191, 100),
- #     (0x1a4, 50),
- #     (0x1a6, 50),
- #     (0x1b0, 50),
- #     (0x1d0, 50),
- #     (0x305, 10),
+      (0x156, 100),
+      (0x158, 100),
+      (0x17c, 100),
+      (0x191, 100),
+      (0x1a4, 50),
+      (0x1a6, 50),
+      (0x1b0, 50),
+      (0x1d0, 50),
+      (0x305, 10),
       (0x324, 10),
- #     (0x405, 3),
+      (0x405, 3),
     ]
   # add gas interceptor reading if we are using it
   if CP.enableGas:
@@ -345,20 +345,20 @@ class CarState(object):
     # error 7 (permanent)
     #self.steer_error = cp.vl[0x18F]['STEER_STATUS'] in [5,7]
     # whitelist instead of blacklist, safer at the expense of disengages
-    if self.acura:
+    if self.accord:
       self.steer_error = False
       self.steer_not_allowed = False
-    #else:
+    else:
       self.steer_error = cp.vl[0x18F]['STEER_STATUS'] not in [0,2,4,6]
       self.steer_not_allowed = cp.vl[0x18F]['STEER_STATUS'] != 0
-      self.brake_error = cp.vl[0x1B0]['BRAKE_ERROR_1'] or cp.vl[0x1B0]['BRAKE_ERROR_2']
-      self.esp_disabled = cp.vl[0x1A4]['ESP_DISABLED']
+    self.brake_error = cp.vl[0x1B0]['BRAKE_ERROR_1'] or cp.vl[0x1B0]['BRAKE_ERROR_2']
+    self.esp_disabled = cp.vl[0x1A4]['ESP_DISABLED']
     # calc best v_ego estimate, by averaging two opposite corners
-      self.v_wheel_fl = cp.vl[0x1D0]['WHEEL_SPEED_FL']
-      self.v_wheel_fr = cp.vl[0x1D0]['WHEEL_SPEED_FR']
-      self.v_wheel_rl = cp.vl[0x1D0]['WHEEL_SPEED_RL']
-      self.v_wheel_rr = cp.vl[0x1D0]['WHEEL_SPEED_RR']
-      self.v_wheel = (self.v_wheel_fl + self.v_wheel_fr + self.v_wheel_rl + self.v_wheel_rr) / 4.
+    self.v_wheel_fl = cp.vl[0x1D0]['WHEEL_SPEED_FL']
+    self.v_wheel_fr = cp.vl[0x1D0]['WHEEL_SPEED_FR']
+    self.v_wheel_rl = cp.vl[0x1D0]['WHEEL_SPEED_RL']
+    self.v_wheel_rr = cp.vl[0x1D0]['WHEEL_SPEED_RR']
+    self.v_wheel = (self.v_wheel_fl + self.v_wheel_fr + self.v_wheel_rl + self.v_wheel_rr) / 4.
 
     # blend in transmission speed at low speed, since it has more low speed accuracy
     self.v_weight = interp(self.v_wheel, v_weight_bp, v_weight_v)
