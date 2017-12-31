@@ -391,10 +391,11 @@ def manager_thread():
   panda = False
   if os.getenv("NOBOARD") is None:
     # *** wait for the board ***
-    panda = wait_for_device() == 0x2300
+  #  start_managed_process("pandad")
 
   # flash the device
   if os.getenv("NOPROG") is None:
+    
     # flash the board
     boarddir = os.path.join(BASEDIR, "panda/board/")
     mkfile = "Makefile" if panda else "Makefile.legacy"
