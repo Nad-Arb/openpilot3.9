@@ -389,7 +389,7 @@ def manager_thread():
   setup_eon_fan()
   
   panda = False
-  if os.getenv("NOBOARD") is None:
+  #if os.getenv("NOBOARD") is None:
     # *** wait for the board ***
   #  start_managed_process("pandad")
 
