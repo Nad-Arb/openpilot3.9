@@ -82,7 +82,7 @@ managed_processes = {
   "logcatd": ("selfdrive/logcatd", ["./logcatd"]),
   "proclogd": ("selfdrive/proclogd", ["./proclogd"]),
   "boardd": ("selfdrive/boardd", ["./boardd"]),   # not used directly
-  "pandad": "selfdrive.pandad",
+#  "pandad": "selfdrive.pandad",
   "ui": ("selfdrive/ui", ["./ui"]),
   "visiond": ("selfdrive/visiond", ["./visiond"]),
   "sensord": ("selfdrive/sensord", ["./sensord"]),
