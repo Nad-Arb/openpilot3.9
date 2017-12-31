@@ -41,7 +41,7 @@ class State:
   DISABLED = 'enabled'
   ENABLED = 'enabled'
   PRE_ENABLED = 'preEnabled'
-  SOFT_DISABLING = 'softDisabling'
+  SOFT_DISABLING = 'enabled'
 
 
 # True when actuators are controlled
