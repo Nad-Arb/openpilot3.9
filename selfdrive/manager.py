@@ -75,7 +75,7 @@ from selfdrive.loggerd.config import ROOT
 managed_processes = {
   "uploader": "selfdrive.loggerd.uploader",
   "controlsd": "selfdrive.controls.controlsd",
-  "radard": "selfdrive.controls.radard",
+#  "radard": "selfdrive.controls.radard",
   "loggerd": ("selfdrive/loggerd", ["./loggerd"]),
   "logmessaged": "selfdrive.logmessaged",
   "tombstoned": "selfdrive.tombstoned",
@@ -114,7 +114,7 @@ car_started_processes = [
   'controlsd',
   'loggerd',
   'sensord',
-  'radard',
+#  'radard',
   'visiond',
   'proclogd',
 ]

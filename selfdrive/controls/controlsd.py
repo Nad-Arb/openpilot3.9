@@ -38,7 +38,7 @@ class Calibration:
 
 
 class State:
-  DISABLED = 'disabled'
+  DISABLED = 'enabled'
   ENABLED = 'enabled'
   PRE_ENABLED = 'preEnabled'
   SOFT_DISABLING = 'softDisabling'

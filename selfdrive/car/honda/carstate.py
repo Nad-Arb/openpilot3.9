@@ -281,7 +281,7 @@ class CarState(object):
     self.crv = False
 
 
-    self.brake_only = False
+    self.brake_only = CP.enableCruise
     self.CP = CP
 
     self.user_gas, self.user_gas_pressed = 0., 0
