@@ -75,14 +75,14 @@ from selfdrive.loggerd.config import ROOT
 managed_processes = {
   "uploader": "selfdrive.loggerd.uploader",
   "controlsd": "selfdrive.controls.controlsd",
-#  "radard": "selfdrive.controls.radard",
+  #"radard": "selfdrive.controls.radard",
   "loggerd": ("selfdrive/loggerd", ["./loggerd"]),
   "logmessaged": "selfdrive.logmessaged",
   "tombstoned": "selfdrive.tombstoned",
   "logcatd": ("selfdrive/logcatd", ["./logcatd"]),
   "proclogd": ("selfdrive/proclogd", ["./proclogd"]),
   "boardd": ("selfdrive/boardd", ["./boardd"]),   # not used directly
-#  "pandad": "selfdrive.pandad",
+  "pandad": "selfdrive.pandad",
   "ui": ("selfdrive/ui", ["./ui"]),
   "visiond": ("selfdrive/visiond", ["./visiond"]),
   "sensord": ("selfdrive/sensord", ["./sensord"]),
@@ -114,7 +114,7 @@ car_started_processes = [
   'controlsd',
   'loggerd',
   'sensord',
-#  'radard',
+ # 'radard',
   'visiond',
   'proclogd',
 ]
@@ -387,22 +387,9 @@ def manager_thread():
 
   # do this before panda flashing
   setup_eon_fan()
-  
-  panda = False
-  #if os.getenv("NOBOARD") is None:
-    # *** wait for the board ***
-  #  start_managed_process("pandad")
 
-  # flash the device
-  if os.getenv("NOPROG") is None:
-    
-    # flash the board
-    boarddir = os.path.join(BASEDIR, "panda/board/")
-    mkfile = "Makefile" if panda else "Makefile.legacy"
-    print "using", mkfile
-    system("cd %s && make -f %s" % (boarddir, mkfile))
-
-  start_managed_process("boardd")
+  if os.getenv("NOBOARD") is None:
+    start_managed_process("pandad")
 
   passive = bool(os.getenv("PASSIVE"))
   passive_starter = LocationStarter()
