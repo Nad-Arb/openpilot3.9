@@ -387,9 +387,21 @@ def manager_thread():
 
   # do this before panda flashing
   setup_eon_fan()
-
+  
+  panda = False
   if os.getenv("NOBOARD") is None:
-    start_managed_process("pandad")
+    # *** wait for the board ***
+    panda = wait_for_device() == 0x2300
+
+  # flash the device
+  if os.getenv("NOPROG") is None:
+    # flash the board
+    boarddir = os.path.join(BASEDIR, "panda/board/")
+    mkfile = "Makefile" if panda else "Makefile.legacy"
+    print "using", mkfile
+    system("cd %s && make -f %s" % (boarddir, mkfile))
+
+  start_managed_process("boardd")
 
   passive = bool(os.getenv("PASSIVE"))
   passive_starter = LocationStarter()
